@@ -1,4 +1,4 @@
-import {Router, Request, Response} from 'express';
+import {Request, Response, Router} from 'express';
 import {FeedRouter} from './feed/routes/feed.router';
 
 const router: Router = Router();
