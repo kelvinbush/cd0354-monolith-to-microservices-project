@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: backend-user
+  name: backend-user-d
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend-user
+  template:
+    metadata:
+      labels:
+        app: backend-user
+    spec:
+      containers:
+        - image: kelvinbush/udagram-api-user:v1
+          name: backend-user
+          imagePullPolicy: Always
+          env:
+            - name: URL
+              valueFrom:
+                configMapKeyRef:
+                  name: udagram-configmap
+                  key: URL
+            - name: AWS_BUCKET
+              valueFrom:
+                configMapKeyRef:
+                  name: udagram-configmap
+                  key: AWS_BUCKET
+            - name: AWS_PROFILE
+              valueFrom:
+                configMapKeyRef:
+                  name: udagram-configmap
+                  key: AWS_PROFILE
+            - name: AWS_REGION
+              valueFrom:
+                configMapKeyRef:
+                  name: udagram-configmap
+                  key: AWS_REGION
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: udagram-secret
+                  key: JWT_SECRET
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: udagram-configmap
+                  key: POSTGRES_DB
+            - name: POSTGRES_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: udagram-configmap
+                  key: POSTGRES_HOST
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: udagram-secret
+                  key: POSTGRES_PASSWORD
+            - name: POSTGRES_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: udagram-secret
+                  key: POSTGRES_USERNAME
+          volumeMounts:
+            - name: aws-secret
+              mountPath: "/root/.aws/"
+              readOnly: true
+      restartPolicy: Always
+      volumes:
+        - name: aws-secret
+          secret:
+            secretName: aws-secret

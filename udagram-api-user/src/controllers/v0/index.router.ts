@@ -6,6 +6,7 @@ const router: Router = Router();
 router.use('/users', UserRouter);
 
 router.get('/', async (req: Request, res: Response) => {
+  console.log("Api called here")
   res.send(`V0`);
 });
 

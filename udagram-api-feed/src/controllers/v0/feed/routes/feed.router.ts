@@ -8,6 +8,7 @@ import * as c from '../../../../config/config';
 const router: Router = Router();
 
 export function requireAuth(req: Request, res: Response, next: NextFunction) {
+  console.log("Api called here")
   if (!req.headers || !req.headers.authorization) {
     return res.status(401).send({message: 'No authorization headers.'});
   }
@@ -28,6 +29,7 @@ export function requireAuth(req: Request, res: Response, next: NextFunction) {
 
 // Get all feed items
 router.get('/', async (req: Request, res: Response) => {
+  console.log("Api called here")
   const items = await FeedItem.findAndCountAll({order: [['id', 'DESC']]});
   items.rows.map((item) => {
     if (item.url) {

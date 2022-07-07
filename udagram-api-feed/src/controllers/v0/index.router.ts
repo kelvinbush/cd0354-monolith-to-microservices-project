@@ -7,6 +7,7 @@ router.use('/feed', FeedRouter);
 
 
 router.get('/', async (req: Request, res: Response) => {
+  console.log("Api called here")
   res.send(`V0`);
 });
 

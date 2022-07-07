@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+data:
+  AWS_BUCKET: udagram-micro-kelvinbush
+  AWS_REGION: us-east-1
+  POSTGRES_DB: postgres
+  AWS_PROFILE: default
+  POSTGRES_HOST: postgres.c89poukmt4lm.us-east-1.rds.amazonaws.com
+  URL: http://localhost:8100
+metadata:
+  name: udagram-configmap
