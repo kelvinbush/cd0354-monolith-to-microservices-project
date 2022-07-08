@@ -5,7 +5,7 @@ metadata:
     service: reverseproxy
   name: reverseproxy
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       service: reverseproxy
@@ -18,6 +18,13 @@ spec:
         - image: kelvinbush/reverseproxy:v1
           name: reverseproxy
           imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "1024Mi"
+              cpu: "500m"
           ports:
             - containerPort: 8080
       restartPolicy: Always

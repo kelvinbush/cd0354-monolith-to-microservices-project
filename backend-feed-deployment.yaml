@@ -5,7 +5,7 @@ metadata:
     app: backend-feed
   name: backend-feed-d
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: backend-feed
@@ -18,6 +18,13 @@ spec:
         - image: kelvinbush/udagram-api-feed:v1
           name: backend-feed
           imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "500m"
+            limits:
+              memory: "2048Mi"
+              cpu: "2000m"
           env:
             - name: URL
               valueFrom:

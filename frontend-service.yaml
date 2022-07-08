@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: udagram-frontend
+  name: udagram-frontend-svc
 spec:
   selector:
     app: udagram-frontend
